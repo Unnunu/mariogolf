@@ -71,9 +71,9 @@ void INITIALIZE_FUNC() {
 
     __osSetSR(__osGetSR() | SR_CU1);    // enable fpu
     __osSetFpcCsr(FPCSR_FS | FPCSR_EV | FPCSR_RM_RN); // flush denorm to zero, enable invalid operation
-#if BUILD_VERSION >= VERSION_K
+//#if BUILD_VERSION >= VERSION_K
     __osSetWatchLo(0x4900000);
-#endif
+//#endif
 
     while (__osSiRawReadIo(PIF_RAM_END - 3, &pifdata)) { // last byte of joychannel ram
         ;

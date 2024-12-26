@@ -22,7 +22,7 @@ ELF_PATH = f"build/{BASENAME}.elf"
 Z64_PATH = f"build/{BASENAME}.z64"
 OK_PATH = f"build/{BASENAME}.ok"
 
-COMMON_INCLUDES = "-I include -I ultralib/include "
+COMMON_INCLUDES = "-I include -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc"
 
 CROSS = "mips-linux-gnu-"
 CROSS_AS = f"{CROSS}as"
@@ -35,10 +35,10 @@ CC = f"{CC_DIR}/gcc"
 AS = f"{CC_DIR}/gcc -x assembler-with-cpp"
 
 CFLAGS = "-nostdinc -mips2 -O2 -g0 -G0 -c -Wall"
-GAME_CC_CMD = f"{CC} {CFLAGS} {COMMON_INCLUDES} -D_LANGUAGE_C -DBUILD_VERSION=VERSION_K -D_FINALROM -DNDEBUG -DF3DEX_GBI_2 -DNUSYS_MT -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name"
+GAME_CC_CMD = f"{CC} {CFLAGS} {COMMON_INCLUDES} -D_LANGUAGE_C -DBUILD_VERSION=VERSION_J -D_FINALROM -DNDEBUG -DF3DEX_GBI_2 -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name"
 
 LIBULTRA_CFLAGS = "-nostdinc -mips2 -O3 -g0 -G0 -c"
-LIBULTRA_CC_CMD = f"{CC} {LIBULTRA_CFLAGS} {COMMON_INCLUDES} -D_LANGUAGE_C -DBUILD_VERSION=VERSION_K -D_FINALROM -DNDEBUG -DF3DEX_GBI_2 -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name"
+LIBULTRA_CC_CMD = f"{CC} {LIBULTRA_CFLAGS} {COMMON_INCLUDES} -D_LANGUAGE_C -DBUILD_VERSION=VERSION_J -D_FINALROM -DNDEBUG -DF3DEX_GBI_2 -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name"
 
 def clean():
     if os.path.exists(".splache"):
@@ -84,7 +84,7 @@ def create_build_script(linker_entries: List[LinkerEntry]):
     ninja.rule(
         "as_libultra",
         description="as $in",
-        command=f"COMPILER_PATH={CC_DIR} {AS} -c -G 0 -D_LANGUAGE_ASSEMBLY -DBUILD_VERSION=VERSION_K -D_FINALROM -D_MIPS_SIM=1 -P -mips2 {COMMON_INCLUDES} -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name",
+        command=f"COMPILER_PATH={CC_DIR} {AS} -c -G 0 -D_LANGUAGE_ASSEMBLY -DBUILD_VERSION=VERSION_J -D_FINALROM -D_MIPS_SIM=1 -P -mips2 {COMMON_INCLUDES} -o $out $in && {CROSS_STRIP} $out -N dummy-symbol-name",
     )
 
     ninja.rule(
