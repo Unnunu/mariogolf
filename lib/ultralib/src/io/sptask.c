@@ -13,7 +13,7 @@
         ptr = (void*)osVirtualToPhysical(ptr); \
     } (void)0
 
-static OSTask tmp_task;
+/*STATICMGstatic*/ OSTask tmp_task;
 
 static OSTask* _VirtualToPhysicalTask(OSTask* intp) {
     OSTask* tp;

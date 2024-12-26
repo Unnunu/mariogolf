@@ -22,7 +22,7 @@ ELF_PATH = f"build/{BASENAME}.elf"
 Z64_PATH = f"build/{BASENAME}.z64"
 OK_PATH = f"build/{BASENAME}.ok"
 
-COMMON_INCLUDES = "-I include -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc"
+COMMON_INCLUDES = "-I include -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc -I lib/nusys"
 
 CROSS = "mips-linux-gnu-"
 CROSS_AS = f"{CROSS}as"
@@ -144,6 +144,8 @@ def create_build_script(linker_entries: List[LinkerEntry]):
                 build(entry.object_path, entry.src_paths, "as")
         elif isinstance(seg, splat.segtypes.common.c.CommonSegC):
             if "ultralib" in str(entry.src_paths[0]):
+                build(entry.object_path, entry.src_paths, "cc_libultra")
+            elif "nusys" in str(entry.src_paths[0]):
                 build(entry.object_path, entry.src_paths, "cc_libultra")
             else:
                 build(entry.object_path, entry.src_paths, "cc")
