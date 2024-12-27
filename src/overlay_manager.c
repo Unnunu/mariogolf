@@ -5,14 +5,14 @@
 typedef struct Overlay {
     /* 0x00 */ s8 isLoaded;
     /* 0x04 */ s8* unk_04;
-    /* 0x08 */ s32 romStart;
-    /* 0x0C */ s32 romEnd;
+    /* 0x08 */ u32 romStart;
+    /* 0x0C */ u32 romEnd;
     /* 0x10 */ u32 textStart;
-    /* 0x14 */ s32 textEnd;
-    /* 0x18 */ s32 bssStart;
+    /* 0x14 */ u32 textEnd;
+    /* 0x18 */ u32 bssStart;
     /* 0x1C */ u32 bssEnd;
     /* 0x20 */ void (*initFunc)(void);
-    /* 0x24 */ void (*unloadFunc)(void);
+    /* 0x24 */ void (*uninitFunc)(void);
 } Overlay; // size = 0x28
 
 void func_80025D30(void);
@@ -39,12 +39,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F14,
-        0x000ADD30,
-        0x000DE9B0,
-        0x801F4A30,
-        0x8021FC70,
-        0x802256B0,
-        0x8022D6A0,
+        (u32)ovl1_ROM_START,
+        (u32)ovl1_ROM_END,
+        (u32)ovl1_TEXT_START,
+        (u32)ovl1_TEXT_END,
+        (u32)ovl1_BSS_START,
+        (u32)ovl1_BSS_END,
         NULL,
         NULL
     },
@@ -52,12 +52,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F14,
-        0x000ADD30,
-        0x000DE9B0,
-        0x801F4A30,
-        0x8021FC70,
-        0x802256B0,
-        0x8022D6A0,
+        (u32)ovl1_ROM_START,
+        (u32)ovl1_ROM_END,
+        (u32)ovl1_TEXT_START,
+        (u32)ovl1_TEXT_END,
+        (u32)ovl1_BSS_START,
+        (u32)ovl1_BSS_END,
         NULL,
         NULL
     },
@@ -65,12 +65,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F14,
-        0x000ADD30,
-        0x000DE9B0,
-        0x801F4A30,
-        0x8021FC70,
-        0x802256B0,
-        0x8022D6A0,
+        (u32)ovl1_ROM_START,
+        (u32)ovl1_ROM_END,
+        (u32)ovl1_TEXT_START,
+        (u32)ovl1_TEXT_END,
+        (u32)ovl1_BSS_START,
+        (u32)ovl1_BSS_END,
         func_80025D30,
         func_80080E14
     },
@@ -78,12 +78,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F20,
-        0x000DE9B0,
-        0x0011BA50,
-        0x801F4A30,
-        0x8022BE00,
-        0x80231AD0,
-        0x8023EDF0,
+        (u32)ovl2_ROM_START,
+        (u32)ovl2_ROM_END,
+        (u32)ovl2_TEXT_START,
+        (u32)ovl2_TEXT_END,
+        (u32)ovl2_BSS_START,
+        (u32)ovl2_BSS_END,
         func_8005A580,
         func_8005ACF8
     },
@@ -91,12 +91,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F24,
-        0x00128580,
-        0x001300A0,
-        0x8024D800,
-        0x802542A0,
-        0x80255320,
-        0x8025D360,
+        (u32)ovl3_ROM_START,
+        (u32)ovl3_ROM_END,
+        (u32)ovl3_TEXT_START,
+        (u32)ovl3_TEXT_END,
+        (u32)ovl3_BSS_START,
+        (u32)ovl3_BSS_END,
         NULL,
         NULL
     },
@@ -104,12 +104,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F28,
-        0x001300A0,
-        0x00136BA0,
-        0x8024D800,
-        0x80253B50,
-        0x80254300,
-        0x8025C8B0,
+        (u32)ovl4_ROM_START,
+        (u32)ovl4_ROM_END,
+        (u32)ovl4_TEXT_START,
+        (u32)ovl4_TEXT_END,
+        (u32)ovl4_BSS_START,
+        (u32)ovl4_BSS_END,
         NULL,
         NULL
     },
@@ -117,12 +117,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F2C,
-        0x00136BA0,
-        0x001370B0,
-        0x8024D800,
-        0x8024DCF0,
-        0x8024DD10,
-        0x80250B70,
+        (u32)ovl5_ROM_START,
+        (u32)ovl5_ROM_END,
+        (u32)ovl5_TEXT_START,
+        (u32)ovl5_TEXT_END,
+        (u32)ovl5_BSS_START,
+        (u32)ovl5_BSS_END,
         NULL,
         NULL
     },
@@ -130,12 +130,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F30,
-        0x001370B0,
-        0x0014EA70,
-        0x801F4A30,
-        0x8020AC40,
-        0x8020C3F0,
-        0x8022C2B0,
+        (u32)ovl6_ROM_START,
+        (u32)ovl6_ROM_END,
+        (u32)ovl6_TEXT_START,
+        (u32)ovl6_TEXT_END,
+        (u32)ovl6_BSS_START,
+        (u32)ovl6_BSS_END,
         func_80025D54,
         0x801F5100
     },
@@ -373,10 +373,10 @@ s32 func_800260C4(s32 arg0) {
         ptr = s0->unk_04;
 
         osWritebackDCacheAll();
-        nuPiReadRom(s0->romStart, s0->textStart, s0->romEnd - s0->romStart);
-        bzero(s0->bssStart, s0->bssEnd - s0->bssStart);
-        osWritebackDCache(s0->bssStart, s0->bssEnd - s0->bssStart);
-        osInvalICache(s0->textStart, s0->textEnd - s0->textStart);
+        nuPiReadRom(s0->romStart, (void*)s0->textStart, s0->romEnd - s0->romStart);
+        bzero((void*)s0->bssStart, s0->bssEnd - s0->bssStart);
+        osWritebackDCache((void*)s0->bssStart, s0->bssEnd - s0->bssStart);
+        osInvalICache((void*)s0->textStart, s0->textEnd - s0->textStart);
 
         if (s0->initFunc != NULL) {
             s0->initFunc();
@@ -413,8 +413,8 @@ void func_80026230(s32 arg0) {
         return;
     }
 
-    if (s0->unloadFunc != NULL) {
-        s0->unloadFunc();
+    if (s0->uninitFunc != NULL) {
+        s0->uninitFunc();
     }
     ptr = s0->unk_04;
 
@@ -428,10 +428,10 @@ void func_80026230(s32 arg0) {
     }
 
     osWritebackDCacheAll();
-    if (D_800B67C0 && osVirtualToPhysical(s0->textStart) < 0x400000) {
-        bzero(s0->textStart, s0->textEnd - s0->textStart);
-        osWritebackDCache(s0->textStart, s0->textEnd - s0->textStart);
-        osInvalICache(s0->textStart, s0->textEnd - s0->textStart);
+    if (D_800B67C0 && osVirtualToPhysical((void*)s0->textStart) < 0x400000) {
+        bzero((void*)s0->textStart, s0->textEnd - s0->textStart);
+        osWritebackDCache((void*)s0->textStart, s0->textEnd - s0->textStart);
+        osInvalICache((void*)s0->textStart, s0->textEnd - s0->textStart);
     }
 }
 
