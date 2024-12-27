@@ -3,6 +3,8 @@
         "os_version.h": "c",
         "common.h": "c",
         "nusys.h": "c",
-        "functions.h": "c"
+        "functions.h": "c",
+        "ultraerror.h": "c",
+        "macros.h": "c"
     }
 }

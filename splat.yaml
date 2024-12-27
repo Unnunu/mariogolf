@@ -72,7 +72,10 @@ segments:
     follows_vram: entry
     bss_size: 0x122100
     subsegments:
-      - [0x1050, asm]
+      - [0x1050, c, bss]
+      - [0x1050, c, BSS]
+      
+      - [0x1050, c, ../lib/nusys/nupireadrom]
       - [0x1130, c, overlay_manager]
       - [0x17B0, asm]
       - [0x3700, asm]
@@ -119,7 +122,6 @@ segments:
       - [0x70E10, asm]
       - [0x74890, asm]
       - [0x748B0, asm] # c, ../lib/nusys/nuboot]
-
       - [0x749F0, asm]
       - [0x78330, asm]
       - [0x78D10, asm]
@@ -390,8 +392,6 @@ segments:
       - [0xADC40, rodata, 8E110]
       - [0xADCA0, rodata, 8E620]
 
-      - { type: bss, vram: 0x800D2930 }
-
   - name: ovl1
     type: code
     start: 0xADD30
@@ -489,8 +489,114 @@ segments:
       - [0x14D2C0, data]
       - { type: bss, vram: 0x8020C3F0 }
 
-  - [0x14EA70, bin]
+  - name: ovl7
+    type: code
+    start: 0x14EA70
+    vram: 0x801F4A30
+    exclusive_ram_id: SegType1
+    bss_size: 0x36320
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x14EA70, asm]
+      - [0x14F960, data]
+      - { type: bss, vram: 0x801F5B10 }
 
+  - name: ovl8
+    type: code
+    start: 0x14FB50
+    vram: 0x801F4A30
+    exclusive_ram_id: SegType1
+    bss_size: 0xA590
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x14FB50, asm]
+      - [0x150890, data]
+      - { type: bss, vram: 0x801F57B0 }
+
+  - name: ovl9
+    type: code
+    start: 0x1508D0
+    vram: 0x801F4A30
+    exclusive_ram_id: SegType1
+    bss_size: 0x10
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x1508D0, asm]
+      - { type: bss, vram: 0x801F4AF0 }
+
+  - name: ovlA
+    type: code
+    start: 0x150990
+    vram: 0x80241800
+    exclusive_ram_id: SegType1
+    bss_size: 0x580
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x150990, asm]
+      - [0x15B5E0, data]
+      - { type: bss, vram: 0x8024C9C0 }
+
+  - name: ovlB
+    type: code
+    start: 0x15BB50
+    vram: 0x80241800
+    exclusive_ram_id: SegType1
+    bss_size: 0x5E00
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x15BB50, asm]
+      - [0x15F160, data]
+      - { type: bss, vram: 0x80244F00 }
+
+  - name: ovlC
+    type: code
+    start: 0x15F250
+    vram: 0x80241800
+    exclusive_ram_id: SegType1
+    bss_size: 0xB0
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x15F250, asm]
+      - [0x161870, data]
+      - { type: bss, vram: 0x80243F50 }
+
+  - name: ovlD
+    type: code
+    start: 0x1619A0
+    vram: 0x80241800
+    exclusive_ram_id: SegType1
+    bss_size: 0xD0
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x1619A0, asm]
+      - [0x165970, data]
+      - { type: bss, vram: 0x80245A20 }
+
+  - name: ovlE
+    type: code
+    start: 0x165BC0
+    vram: 0x801F4A30
+    exclusive_ram_id: SegType1
+    bss_size: 0x110
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x165BC0, asm]
+      - [0x16CCB0, data]
+      - { type: bss, vram: 0x801FC4C0 }
+
+  - name: ovlF
+    type: code
+    start: 0x16D650
+    vram: 0x801F4A30
+    exclusive_ram_id: SegType1
+    bss_size: 0x2ACC0
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x16D650, asm]
+      - [0x1715C0, data]
+      - { type: bss, vram: 0x801F8B50 }
+
+  - [0x171770, bin, builddate]
   - [0x171790, bin]
   - [0x18BE00, bin]
   - [0xD9B9C0, bin]

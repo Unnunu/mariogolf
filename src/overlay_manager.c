@@ -2,6 +2,8 @@
 #include "nusys.h"
 #include "ld_addrs.h"
 
+#define NUM_OVERLAYS ARRAY_COUNTU(sOverlays)
+
 typedef struct Overlay {
     /* 0x00 */ s8 isLoaded;
     /* 0x04 */ s8* unk_04;
@@ -35,7 +37,7 @@ s8 D_800B5F4C[] = { 22, -1 };
 s8 D_800B5F50[] = { 27, 29, 32, -1 };
 s8 D_800B5F54[] = { 31, -1 };
 
-Overlay D_800B5F58[] = {
+Overlay sOverlays[] = {
     {
         FALSE,
         D_800B5F14,
@@ -143,12 +145,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F34,
-        0x0014EA70,
-        0x0014FB50,
-        0x801F4A30,
-        0x801F5920,
-        0x801F5B10,
-        0x8022BE30,
+        (u32)ovl7_ROM_START,
+        (u32)ovl7_ROM_END,
+        (u32)ovl7_TEXT_START,
+        (u32)ovl7_TEXT_END,
+        (u32)ovl7_BSS_START,
+        (u32)ovl7_BSS_END,
         0x801F4C84,
         0x801F4D48
     },
@@ -156,12 +158,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F38,
-        0x0014FB50,
-        0x001508D0,
-        0x801F4A30,
-        0x801F5770,
-        0x801F57B0,
-        0x801FFD40,
+        (u32)ovl8_ROM_START,
+        (u32)ovl8_ROM_END,
+        (u32)ovl8_TEXT_START,
+        (u32)ovl8_TEXT_END,
+        (u32)ovl8_BSS_START,
+        (u32)ovl8_BSS_END,
         0x801F4A40,
         NULL
     },
@@ -169,12 +171,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F3C,
-        0x001508D0,
-        0x00150990,
-        0x801F4A30,
-        0x801F4AF0,
-        0x801F4AF0,
-        0x801F4B00,
+        (u32)ovl9_ROM_START,
+        (u32)ovl9_ROM_END,
+        (u32)ovl9_TEXT_START,
+        (u32)ovl9_TEXT_END,
+        (u32)ovl9_BSS_START,
+        (u32)ovl9_BSS_END,
         NULL,
         NULL
     },
@@ -182,12 +184,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F40,
-        0x00150990,
-        0x0015BB50,
-        0x80241800,
-        0x8024C450,
-        0x8024C9C0,
-        0x8024CF40,
+        (u32)ovlA_ROM_START,
+        (u32)ovlA_ROM_END,
+        (u32)ovlA_TEXT_START,
+        (u32)ovlA_TEXT_END,
+        (u32)ovlA_BSS_START,
+        (u32)ovlA_BSS_END,
         NULL,
         NULL
     },
@@ -195,12 +197,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F44,
-        0x0015BB50,
-        0x0015F250,
-        0x80241800,
-        0x80244E10,
-        0x80244F00,
-        0x8024AD00,
+        (u32)ovlB_ROM_START,
+        (u32)ovlB_ROM_END,
+        (u32)ovlB_TEXT_START,
+        (u32)ovlB_TEXT_END,
+        (u32)ovlB_BSS_START,
+        (u32)ovlB_BSS_END,
         NULL,
         NULL
     },
@@ -208,12 +210,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F48,
-        0x0015F250,
-        0x001619A0,
-        0x80241800,
-        0x80243E20,
-        0x80243F50,
-        0x80244000,
+        (u32)ovlC_ROM_START,
+        (u32)ovlC_ROM_END,
+        (u32)ovlC_TEXT_START,
+        (u32)ovlC_TEXT_END,
+        (u32)ovlC_BSS_START,
+        (u32)ovlC_BSS_END,
         NULL,
         NULL
     },
@@ -221,12 +223,12 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F4C,
-        0x001619A0,
-        0x00165BC0,
-        0x80241800,
-        0x802457D0,
-        0x80245A20,
-        0x80245AF0,
+        (u32)ovlD_ROM_START,
+        (u32)ovlD_ROM_END,
+        (u32)ovlD_TEXT_START,
+        (u32)ovlD_TEXT_END,
+        (u32)ovlD_BSS_START,
+        (u32)ovlD_BSS_END,
         NULL,
         NULL
     },
@@ -234,30 +236,31 @@ Overlay D_800B5F58[] = {
     {
         FALSE,
         D_800B5F50,
-        0x00165BC0,
-        0x0016D650,
-        0x801F4A30,
-        0x801FBB20,
-        0x801FC4C0,
-        0x801FC5D0,
+        (u32)ovlE_ROM_START,
+        (u32)ovlE_ROM_END,
+        (u32)ovlE_TEXT_START,
+        (u32)ovlE_TEXT_END,
+        (u32)ovlE_BSS_START,
+        (u32)ovlE_BSS_END,
         0x801F4B20,
         0x801F4E70
     },
     {
         FALSE,
         D_800B5F54,
-        0x0016D650,
-        0x00171770,
-        0x801F4A30,
-        0x801F89A0,
-        0x801F8B50,
-        0x80223810,
+        (u32)ovlF_ROM_START,
+        (u32)ovlF_ROM_END,
+        (u32)ovlF_TEXT_START,
+        (u32)ovlF_TEXT_END,
+        (u32)ovlF_BSS_START,
+        (u32)ovlF_BSS_END,
         0x801F4B9C,
         0x801F4E54
     },
 };
 
-extern s8 D_800D2930[];
+s8 DD_800D2930[64] ALIGNED(8);
+
 extern s8 D_800FC858[];
 extern u32 D_8012CFC0[];
 extern u32 D_800B67F0;
@@ -274,164 +277,164 @@ void func_80025D54(void) {
 }
 
 s32 func_80025D78(s32 arg0) {
-    return D_800D2930[arg0] | 0x100;
+    return DD_800D2930[arg0] | 0x100;
 }
 
-void func_80025D8C(void) {
+void initOverlayManager(void) {
     s32 i;
     s32 k;
     s8* ptr;
 
     for (i = 0; i < 64; i++) {
-        D_800D2930[i] = -1;
-        D_800FC858[i] = 0;
+        DD_800D2930[i] = -1;
+        D_800FC858[i] = FALSE;
         D_8012CFC0[i] = 0x80000000;
     }
 
-    for (i = 0; i < 17U; i++) {
-        ptr = D_800B5F58[i].unk_04;
+    for (i = 0; i < NUM_OVERLAYS; i++) {
+        ptr = sOverlays[i].unk_04;
         for (k = 0; ptr[k] != -1; k++) {
-            if (D_800D2930[ptr[k]] != -1) {
+            if (DD_800D2930[ptr[k]] != -1) {
                 if (!func_800299F4(0x4D)) {
                     osSyncPrintf("OverlayManager\n");
                 }
             }
-            D_800D2930[ptr[k]] = i;
+            DD_800D2930[ptr[k]] = i;
         }
     }
 
     for (i = 0; i < 64; i++) {
-        if (D_800D2930[i] == -1) {
-            D_800FC858[i] = 1;
+        if (DD_800D2930[i] == -1) {
+            D_800FC858[i] = TRUE;
         }
     }
 }
 
-s32 func_80025EC8(s32 arg0) {
-    if (arg0 < 0x100 || arg0 >= 0x100 + 0x11U) {
+s32 getOverlayAbsoluteNo(s32 logicalNo) {
+    if (logicalNo < 0x100 || logicalNo >= 0x100 + NUM_OVERLAYS) {
         if (!func_800299F4(0x4D)) {
             osSyncPrintf("Illegal ModuleSetNo.\n");
         }
         return 0;
     }
 
-    return arg0 & 0xFF;
+    return logicalNo & 0xFF;
 }
 
-s32 func_80025F18(s32 arg0) {
-    s32 v0;
+s32 canOverlayBeLoaded(s32 ovlIndex) {
+    s32 asbNum;
     s32 i;
     s8* ptr;
     s32 k;
 
-    v0 = func_80025EC8(arg0);
-    if (D_800B5F58[v0].isLoaded) {
+    asbNum = getOverlayAbsoluteNo(ovlIndex);
+    if (sOverlays[asbNum].isLoaded) {
         if (!func_800299F4(0x4D)) {
             osSyncPrintf("Already Loaded\n");
         }
-        return 1;
+        return TRUE;
     }
 
-    for (i = 0; i < 17U; i++) {
-        if (i == v0 || D_800B5F58[i].textStart > D_800B5F58[v0].bssEnd || D_800B5F58[i].bssEnd < D_800B5F58[v0].textStart) {
+    for (i = 0; i < NUM_OVERLAYS; i++) {
+        if (i == asbNum || sOverlays[i].textStart > sOverlays[asbNum].bssEnd || sOverlays[i].bssEnd < sOverlays[asbNum].textStart) {
             continue;
         }
 
-        if (D_800B5F58[i].isLoaded) {
+        if (sOverlays[i].isLoaded) {
             if (!func_800299F4(0x4D)) {
-                osSyncPrintf("Conflicting %d m.s. and other moduleset[%x] is alive\n", v0, i);
+                osSyncPrintf("Conflicting %d m.s. and other moduleset[%x] is alive\n", asbNum, i);
             }
-            return 0;
+            return FALSE;
         }
 
-        ptr = D_800B5F58[i].unk_04;
+        ptr = sOverlays[i].unk_04;
         for (k = 0; ptr[k] != -1; k++) {
             if (D_800B67F0 - D_8012CFC0[ptr[k]] < 2) {
                 if (!func_800299F4(0x4D)) {
-                    osSyncPrintf("Conflicting %d m.s. and other module[%x-%x]'s RDP request\n", v0, i, k);
+                    osSyncPrintf("Conflicting %d m.s. and other module[%x-%x]'s RDP request\n", asbNum, i, k);
                 }
-                return 0;
+                return FALSE;
             }
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
-s32 func_800260C4(s32 arg0) {
+s32 loadOverlay(s32 ovlIndex) {
     s8* ptr;
     s32 k;
-    Overlay* s0;
+    Overlay* overlay;
 
-    if (func_80025F18(arg0)) {
-        arg0 = func_80025EC8(arg0);
+    if (canOverlayBeLoaded(ovlIndex)) {
+        ovlIndex = getOverlayAbsoluteNo(ovlIndex);
         if (!func_800299F4(0x4D)) {
-            osSyncPrintf("Load ModuleSet %x (absolute No.)\n", arg0);
+            osSyncPrintf("Load ModuleSet %x (absolute No.)\n", ovlIndex);
         }
 
-        s0 = &D_800B5F58[arg0];
-        ptr = s0->unk_04;
+        overlay = &sOverlays[ovlIndex];
+        ptr = overlay->unk_04;
 
         osWritebackDCacheAll();
-        nuPiReadRom(s0->romStart, (void*)s0->textStart, s0->romEnd - s0->romStart);
-        bzero((void*)s0->bssStart, s0->bssEnd - s0->bssStart);
-        osWritebackDCache((void*)s0->bssStart, s0->bssEnd - s0->bssStart);
-        osInvalICache((void*)s0->textStart, s0->textEnd - s0->textStart);
+        nuPiReadRom(overlay->romStart, (void*)overlay->textStart, overlay->romEnd - overlay->romStart);
+        bzero((void*)overlay->bssStart, overlay->bssEnd - overlay->bssStart);
+        osWritebackDCache((void*)overlay->bssStart, overlay->bssEnd - overlay->bssStart);
+        osInvalICache((void*)overlay->textStart, overlay->textEnd - overlay->textStart);
 
-        if (s0->initFunc != NULL) {
-            s0->initFunc();
+        if (overlay->initFunc != NULL) {
+            overlay->initFunc();
         }
 
         for (k = 0; ptr[k] != -1; k++) {
-            D_800FC858[ptr[k]] = 1;
+            D_800FC858[ptr[k]] = TRUE;
         }
 
-        s0->isLoaded = TRUE;
+        overlay->isLoaded = TRUE;
 
         if (!func_800299F4(0x4D)) {
-            osSyncPrintf("Complete Load ModuleSet %x (absolute No.)\n", arg0);
+            osSyncPrintf("Complete Load ModuleSet %x (absolute No.)\n", ovlIndex);
         }
-        return 1;
+        return TRUE;
     } else {
         if (!func_800299F4(0x4D)) {
-            osSyncPrintf("Can't Load ModuleSet %x (logical No.)\n", arg0);
+            osSyncPrintf("Can't Load ModuleSet %x (logical No.)\n", ovlIndex);
         }
-        return 0;
+        return FALSE;
     }
 }
 
-void func_80026230(s32 arg0) {
-    Overlay* s0;
+void unloadOverlay(s32 ovlIndex) {
+    Overlay* overlay;
     s8* ptr;
     s32 k;
 
-    arg0 = func_80025EC8(arg0);
-    s0 = &D_800B5F58[arg0];
+    ovlIndex = getOverlayAbsoluteNo(ovlIndex);
+    overlay = &sOverlays[ovlIndex];
     
 
-    if (!s0->isLoaded) {
+    if (!overlay->isLoaded) {
         return;
     }
 
-    if (s0->uninitFunc != NULL) {
-        s0->uninitFunc();
+    if (overlay->uninitFunc != NULL) {
+        overlay->uninitFunc();
     }
-    ptr = s0->unk_04;
+    ptr = overlay->unk_04;
 
-    s0->isLoaded = 0;
+    overlay->isLoaded = FALSE;
     if (!func_800299F4(0x4D)) {
-        osSyncPrintf("Moduleset %x Disposed\n", arg0);
+        osSyncPrintf("Moduleset %x Disposed\n", ovlIndex);
     }
 
     for (k = 0; ptr[k] != -1; k++) {
-        D_800FC858[ptr[k]] = 0;
+        D_800FC858[ptr[k]] = FALSE;
     }
 
     osWritebackDCacheAll();
-    if (D_800B67C0 && osVirtualToPhysical((void*)s0->textStart) < 0x400000) {
-        bzero((void*)s0->textStart, s0->textEnd - s0->textStart);
-        osWritebackDCache((void*)s0->textStart, s0->textEnd - s0->textStart);
-        osInvalICache((void*)s0->textStart, s0->textEnd - s0->textStart);
+    if (D_800B67C0 && osVirtualToPhysical((void*)overlay->textStart) < 0x400000) {
+        bzero((void*)overlay->textStart, overlay->textEnd - overlay->textStart);
+        osWritebackDCache((void*)overlay->textStart, overlay->textEnd - overlay->textStart);
+        osInvalICache((void*)overlay->textStart, overlay->textEnd - overlay->textStart);
     }
 }
 
