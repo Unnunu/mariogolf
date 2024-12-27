@@ -7,7 +7,7 @@
 /*----------------------------------------------------------------------*/    
 /* Ver 1.0	97/10/9		Created by Kensaku Ohki(SLANP)		*/
 /*======================================================================*/
-/* $Id: nugfxtaskmgr.c,v 1.10 1999/07/16 13:24:26 ohki Exp ohki $	*/
+/* $Id: nugfxtaskmgr.c,v 1.8 1999/04/28 12:42:40 ohki Exp ohki $	*/
 /*======================================================================*/
 #include <nusys.h>
 
@@ -34,8 +34,6 @@ u16*		nuGfxCfb_ptr;	/* Frame buffers to be rendered	*/
 u16*		nuGfxZBuffer;	/* Pointer to Z-buffer	*/
 u32		nuGfxDisplay;	/* Screen display on/off */
 u32		nuGfxCfbCounter;
-s32		nuGfxUcodeFifoSize = -1; /*FIFO buffer size -1:size undefined*/
-u64*		nuGfxUcodeFifoPtr = NULL;/*Pointer to FIFO buffer */
 
 NUGfxSwapCfbFunc nuGfxSwapCfbFunc = NULL; /* swapbuf callback function ptr */
 NUGfxTaskEndFunc nuGfxTaskEndFunc = NULL; /* task end callback  ptr */
@@ -135,9 +133,9 @@ void nuGfxTaskMgrInit(void)
 	 nuGfxTask[cnt].list.t.ucode_data_size 	= SP_UCODE_DATA_SIZE;
 	 nuGfxTask[cnt].list.t.dram_stack	= (u64*) nuDramStack;
 	 nuGfxTask[cnt].list.t.dram_stack_size 	= SP_DRAM_STACK_SIZE8;
-//	 nuGfxTask[cnt].list.t.output_buff	= (u64 *)&nuRDPOutputBuf[0];
-//	 nuGfxTask[cnt].list.t.output_buff_size =
-//	     (u64 *)(nuGfxFifoBufPtr + nuGfxUcodeFifoSize);
+	 nuGfxTask[cnt].list.t.output_buff	= (u64 *)&nuRDPOutputBuf[0];
+	 nuGfxTask[cnt].list.t.output_buff_size =
+	     (u64 *)(nuRDPOutputBuf + NU_GFX_RDP_OUTPUTBUFF_SIZE);
 	 nuGfxTask[cnt].list.t.yield_data_ptr	= (u64 *) nuYieldBuf;
 	 nuGfxTask[cnt].list.t.yield_data_size	= NU_GFX_YIELD_BUF_SIZE;
      }
@@ -183,21 +181,11 @@ void nuGfxTaskMgrInit(void)
      OSIntMask	mask;
      static u16	beforeFlag = 0;
 	 
-#ifdef NU_DEBUG
-     if(!(flag & NU_SC_UCODE_XBUS) && (nuGfxUcodeFifoSize < 0)){
-	 osSyncPrintf("nuGfxTaskStart: Must set FIFO buffer for fifo-ucode(use nuGfxSetUcodeFifo)\n");
-	 return;
-     }
-#endif /* NU_DEBUG */
-	 
      nuGfxTask_ptr->list.t.data_ptr	= (u64*)gfxList_ptr;
      nuGfxTask_ptr->list.t.data_size	= gfxListSize;
      nuGfxTask_ptr->list.t.flags	= flag >> 16;
      nuGfxTask_ptr->list.t.ucode 	= nuGfxUcode[ucode].ucode;
      nuGfxTask_ptr->list.t.ucode_data	= nuGfxUcode[ucode].ucode_data;
-     nuGfxTask_ptr->list.t.output_buff	= nuGfxUcodeFifoPtr;
-     nuGfxTask_ptr->list.t.output_buff_size =
-	 (nuGfxUcodeFifoPtr + nuGfxUcodeFifoSize /sizeof(u64));
      nuGfxTask_ptr->flags		= flag & 0x0000ffff;
      nuGfxTask_ptr->framebuffer		= (u16*)nuGfxCfb_ptr;
 

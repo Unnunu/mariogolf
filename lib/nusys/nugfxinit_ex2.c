@@ -105,12 +105,8 @@ void nuGfxInitEX2(void)
     /* Register the callback function for frame buffer switching. */
     nuGfxSwapCfbFuncSet(nuGfxSwapCfb);
 
-    /* Set up FIFO buffer for FIFO microcode	*/
-    nuGfxSetUcodeFifo(nuRDPOutputBuf, NU_GFX_RDP_OUTPUTBUFF_SIZE);
 
-    /* Register graphics microcode */
     nuGfxSetUcode(nugfx_ucode);
-
     /* Initialize the graphics task manager. */
     nuGfxTaskMgrInit();
 

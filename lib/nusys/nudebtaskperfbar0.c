@@ -7,13 +7,9 @@
 /*----------------------------------------------------------------------*/    
 /* Ver 1.0	97/10/9		Created by Kensaku Ohki(SLANP)		*/
 /*======================================================================*/
-/* $Id: nudebtaskperfbar0.c,v 1.6 1999/07/09 06:17:10 ohki Exp $	*/
+/* $Id: nudebtaskperfbar0.c,v 1.4 1998/07/12 12:17:55 ohki Exp ohki $	*/
 /*======================================================================*/
 #ifdef NU_DEBUG
-#ifndef	F3DEX_GBI_2
-#define	F3DEX_GBI
-#endif	/* F3DEX_GBI_2*/
-
 #include <nusys.h>
 
 #define	VFRAME		140

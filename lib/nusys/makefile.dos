@@ -30,50 +30,12 @@ MAKEROM = mild
 #
 
 NUBOOTSRC	=	nuboot.c
-NUBOOTROMSRC	=	nuboot_rom.c
-NUBOOTPTNSRC	=	nuboot_ptn.c
-NUBOOTISVSRC	=	nuboot_isv.c
-NUBOOTEMUSRC	=	nuboot_emu.c
-NUBOOTMSPSRC	=	nuboot_msp.c
-
 NUBOOTOBJ	=	$(NUBOOTSRC:.c=.o)
-NUBOOTROMOBJ	=	$(NUBOOTROMSRC:.c=.o)
-NUBOOTPTNOBJ	=	$(NUBOOTPTNSRC:.c=.o)
-NUBOOTISVOBJ	=	$(NUBOOTISVSRC:.c=.o)
-NUBOOTEMUOBJ	=	$(NUBOOTEMUSRC:.c=.o)
-NUBOOTMSPOBJ	=	$(NUBOOTMSPSRC:.c=.o)
-
 NUBOOTLIB	= 	nusys.o
-NUBOOTROMLIB	= 	nusys_rom.o
-NUBOOTPTNLIB	= 	nusys_ptn.o
-NUBOOTISVLIB	= 	nusys_isv.o
-NUBOOTEMULIB	= 	nusys_emu.o
-NUBOOTMSPLIB	= 	nusys_msp.o
-
-NUBOOTDEBLIB	= 	nusys_d.o
-NUBOOTPTNDEBLIB	= 	nusys_ptn_d.o
-NUBOOTISVDEBLIB	= 	nusys_isv_d.o
-NUBOOTEMUDEBLIB	= 	nusys_emu_d.o
-NUBOOTMSPDEBLIB	= 	nusys_msp_d.o
-
-NUBOOTOBJS	=	$(NUBOOTLIB) \
-			$(NUBOOTROMLIB) \
-			$(NUBOOTPTNLIB) \
-			$(NUBOOTISVLIB) \
-			$(NUBOOTEMULIB) \
-			$(NUBOOTMSPLIB)
-
-NUBOOTDEBOBJS	=	$(NUBOOTDEBLIB) \
-			$(NUBOOTPTNDEBLIB) \
-			$(NUBOOTISVDEBLIB) \
-			$(NUBOOTEMUDEBLIB) \
-			$(NUBOOTMSPDEBLIB)
-
 ROMLIB		=	libnusys.a
 DEBUGLIB	=	libnusys_d.a
 ROMOBJDIR       =       libnusys
 DEBUGOBJDIR     =       libnusys_d
-
 HEADER          =       nusys.h
 
 LIBSYSSRC	= 	nusched.c 			\
@@ -95,7 +57,6 @@ LIBSYSSRC	= 	nusched.c 			\
 			nugfxsetcfb.c			\
 			nugfxdisplayoff.c 		\
 			nugfxdisplayon.c 		\
-			nugfxsetucodefifo.c		\
 			nudebtaskperfbar0.c		\
 			nudebtaskperfbar1.c		\
 			nudebload.c			\
@@ -188,7 +149,6 @@ LIBSYSSRC	= 	nusched.c 			\
 			nufont.c			\
 			nupireadromoverlay.c
 
-
 LIBSYSOBJ	=	$(LIBSYSSRC:.c=.o)
 
 VPATH           = ..
@@ -196,75 +156,32 @@ VPATH           = ..
 #
 # compile
 #
-default:
+default: $(NUBOOTLIB) nusys.h
 	-mkdir $(ROMOBJDIR)
 	$(MAKE) -C $(ROMOBJDIR) -f ..\Makefile OPTIMIZER=-O3 $(ROMLIB)
 	-mkdir $(DEBUGOBJDIR)
 	$(MAKE) -C $(DEBUGOBJDIR) -f ..\Makefile OPTIMIZER=-g MOPTDEF=-DNU_DEBUG $(DEBUGLIB)
 
-
-$(ROMLIB): $(LIBSYSOBJ) $(NUBOOTOBJS) ../nusys.h
-        $(AR) $(ARFLAGS) $(ROMLIB) $(LIBSYSOBJ)
-        $(RANLIB) $(ROMLIB)
-
-$(DEBUGLIB):    $(LIBSYSOBJ) $(NUBOOTDEBOBJS) ../nusys.h
-        $(AR) $(ARFLAGS) $(DEBUGLIB) $(LIBSYSOBJ)
-        $(RANLIB) $(DEBUGLIB)
-
-#
-# boot code
-#
-#nusys_boot:	$(NUBOOTOBJS)
-#nusys_boot_d:	$(NUBOOTDEBOBJS)
-
-$(NUBOOTLIB):	$(NUBOOTOBJ) nusys.h
+$(NUBOOTLIB):   $(NUBOOTOBJ) nusys.h
 	$(LD) -o $(NUBOOTLIB) -r $(NUBOOTOBJ)
-$(NUBOOTROMLIB):	$(NUBOOTOBJ) nusys.h
-	$(LD) -o $(NUBOOTROMLIB) -r $(NUBOOTOBJ)
-$(NUBOOTPTNLIB):	$(NUBOOTROMOBJ) nusys.h
-	$(LD) -o $(NUBOOTPTNLIB) -r $(NUBOOTROMOBJ)
-$(NUBOOTISVLIB):	$(NUBOOTISVOBJ) nusys.h
-	$(LD) -o $(NUBOOTISVLIB) -r $(NUBOOTISVOBJ)
-$(NUBOOTEMULIB):	$(NUBOOTEMUOBJ) nusys.h
-	$(LD) -o $(NUBOOTEMULIB) -r $(NUBOOTEMUOBJ)
-$(NUBOOTMSPLIB):	$(NUBOOTMSPOBJ) nusys.h
-	$(LD) -o $(NUBOOTMSPLIB) -r $(NUBOOTMSPOBJ)
-$(NUBOOTDEBLIB):	$(NUBOOTOBJ) nusys.h
-	$(LD) -o $(NUBOOTDEBLIB) -r $(NUBOOTOBJ)
-$(NUBOOTPTNDEBLIB):	$(NUBOOTPTNOBJ) nusys.h
-	$(LD) -o $(NUBOOTPTNDEBLIB) -r $(NUBOOTPTNOBJ)
-$(NUBOOTISVDEBLIB):	$(NUBOOTISVOBJ) nusys.h
-	$(LD) -o $(NUBOOTISVDEBLIB) -r $(NUBOOTISVOBJ)
-$(NUBOOTEMUDEBLIB):	$(NUBOOTEMUOBJ) nusys.h
-	$(LD) -o $(NUBOOTEMUDEBLIB) -r $(NUBOOTEMUOBJ)
-$(NUBOOTMSPDEBLIB):	$(NUBOOTMSPOBJ) nusys.h
-	$(LD) -o $(NUBOOTMSPDEBLIB) -r $(NUBOOTMSPOBJ)
 
-$(NUBOOTOBJ):	../$(NUBOOTSRC) ../nusys.h
-$(NUBOOTROMOBJ):	../$(NUBOOTROMSRC) ../nusys.h
-$(NUBOOTPTNOBJ):	../$(NUBOOTPTNSRC) ../nusys.h
-$(NUBOOTISVOBJ):	../$(NUBOOTISVSRC) ../nusys.h
-$(NUBOOTEMUOBJ):	../$(NUBOOTEMUSRC) ../nusys.h
-$(NUBOOTMSPOBJ):	../$(NUBOOTMSPSRC) ../nusys.h
+$(ROMLIB): $(LIBSYSOBJ) ../nusys.h
+        $(AR) $(ARFLAGS) ../$(ROMLIB) $(LIBSYSOBJ)
+        $(RANLIB) ../$(ROMLIB)
+
+$(DEBUGLIB):    $(LIBSYSOBJ) ../nusys.h
+        $(AR) $(ARFLAGS) ../$(DEBUGLIB) $(LIBSYSOBJ)
+        $(RANLIB) ../$(DEBUGLIB)
 
 install:
+        $(CP) $(ROMLIB) $(NUSYSLIBDIR)
+        $(CP) $(DEBUGLIB) $(NUSYSLIBDIR)
+	$(CP) $(NUBOOTLIB)  $(NUSYSLIBDIR)
 	$(CP) $(HEADER) $(NUSYSINCDIR)
-	$(CP) $(ROMOBJDIR)\$(ROMLIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTLIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTROMLIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTPTNLIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTISVLIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTEMULIB) $(NUSYSLIBDIR)
-	$(CP) $(ROMOBJDIR)\$(NUBOOTMSPLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(DEBUGLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(NUBOOTDEBLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(NUBOOTPTNDEBLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(NUBOOTISVDEBLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(NUBOOTEMUDEBLIB) $(NUSYSLIBDIR)
-        $(CP) $(DEBUGOBJDIR)\$(NUBOOTMSPDEBLIB) $(NUSYSLIBDIR)
 
 clean:
 	$(RM) $(ROMOBJDIR)\*.o
-	$(RM) $(ROMOBJDIR)\*.a
 	$(RM) $(DEBUGOBJDIR)\*.o
-	$(RM) $(DEBUGOBJDIR)\*.a
+	$(RM) $(NUBOOTLIB)
+	$(RM) $(NUBOOTOBJ)
+        $(RM) *.a

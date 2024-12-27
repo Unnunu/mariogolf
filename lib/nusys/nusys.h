@@ -9,7 +9,7 @@
 /* Ver 1.2	98/07/12	Modified by Kensaku Ohki(SLANP)		*/
 /* Ver 2.0	90/01/23	Modified by Kensaku Ohki(SLANP)		*/
 /*----------------------------------------------------------------------*/
-/* $Id: nusys.h,v 1.29 1999/07/16 13:27:31 ohki Exp $		*/
+/* $Id: nusys.h,v 1.26 1999/05/07 08:23:45 ohki Exp ohki $		*/
 /*======================================================================*/
 #ifndef _NUSYS_H_
 #define _NUSYS_H_
@@ -17,10 +17,8 @@
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 
 #ifndef F3DEX_GBI
-#ifndef F3DEX_GBI_2
-#define F3DEX_GBI_2
-#endif	/* F3DEX_GBI_2	*/
-#endif	/* F3DEX_GBI	*/
+#define	F3DEX_GBI
+#endif	/* F3DEX_GBI */
 
 #include <ultra64.h>
 #include <PR/gs2dex.h>
@@ -680,8 +678,6 @@ extern u32		nuGfxDisplay;	/* Display on/off flag  */
 extern u32		nuGfxCfbCounter; /* For frame buffer swapping */
 extern OSMesgQueue	nuGfxMesgQ;
 extern OSThread		nuGfxThread;			/* graphic thread */
-extern s32		nuGfxUcodeFifoSize; 	/*FIFO buffer size -1:size undefined*/
-extern u64*		nuGfxUcodeFifoPtr;	/*Pointer to FIFO buffer */
 
 /*--------------------------------------*/
 /*  controller  Manager variables 	*/
@@ -798,7 +794,7 @@ extern void nuGfxTaskAllEndWait(void);
 extern void nuGfxRetraceWait(u32 retrace_num);
 extern void nuGfxDisplayOff(void);
 extern void nuGfxDisplayOn(void);
-extern void nuGfxSetUcodeFifo(void* fifoBufPtr, s32 size);
+
 #ifdef F3DEX_GBI_2
 #define	nuGfxInit()	nuGfxInitEX2()
 #endif /* F3DEX_GBI_2 */

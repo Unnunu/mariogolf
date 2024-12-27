@@ -36,7 +36,7 @@
 /*		Made change so the user can set marks in the    	*/
 /*		performance measurement part.					*/
 /*======================================================================*/
-/* $Id: nusched.c,v 1.14 1999/06/10 04:44:03 ohki Exp $		*/
+/* $Id: nusched.c,v 1.13 1999/06/02 09:20:48 ohki Exp ohki $		*/
 /*======================================================================*/
 
 #include <nusys.h>

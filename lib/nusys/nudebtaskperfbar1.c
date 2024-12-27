@@ -5,12 +5,9 @@
 /*		Copyright (C) 1997, NINTENDO Co,Ltd.			*/
 /*									*/
 /*======================================================================*/
-/* $Id: nudebtaskperfbar1.c,v 1.6 1999/07/09 06:17:24 ohki Exp $	*/
+/* $Id: nudebtaskperfbar1.c,v 1.4 1998/07/12 12:17:43 ohki Exp ohki $	*/
 /*======================================================================*/
 #ifdef NU_DEBUG
-#ifndef	F3DEX_GBI_2
-#define	F3DEX_GBI
-#endif	/* F3DEX_GBI_2*/
 #include <nusys.h>
 #define	VFRAME		280
 #define	BAR_WIDTH	2

@@ -43,9 +43,6 @@ void nuBoot(void)
 {
 
     osInitialize();	/* Initialize N64OS   */
-
-    // ADDED IN MARIO GOLF
-    osAiSetFrequency(32000);
     
     /* Create and execute the Idle thread  */
     osCreateThread(&IdleThread,NU_IDLE_THREAD_ID, idle, 0,

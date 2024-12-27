@@ -10,12 +10,8 @@
 #include <nusys.h>
 
 /*----------------------------------------------------------------------*/
-/* The RSP fifo buffer 							*/
+/* The RSP fifo buffer 									*/
 /* It is set as the separate object for making the 16-byte boundary sort*/
 /*----------------------------------------------------------------------*/
-#if defined(__GNUC__)
-u8 nuRDPOutputBuf[NU_GFX_RDP_OUTPUTBUFF_SIZE] __attribute__((aligned (16)));
-#else
 u8 nuRDPOutputBuf[NU_GFX_RDP_OUTPUTBUFF_SIZE];
-#endif
 

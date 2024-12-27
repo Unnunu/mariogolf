@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s32 D_800B67D8;
+
 INCLUDE_ASM("asm/nonmatchings/main", func_800299D0);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800299F4);

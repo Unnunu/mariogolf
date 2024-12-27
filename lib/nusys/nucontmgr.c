@@ -7,7 +7,7 @@
 /*----------------------------------------------------------------------*/
 /* Ver 1.0	97/10/9		Created by Kensaku Ohki(SLANP)		*/
 /*======================================================================*/
-/* $Id: nucontmgr.c,v 1.14 1999/07/02 05:57:41 ohki Exp $		*/
+/* $Id: nucontmgr.c,v 1.13 1999/01/23 05:43:23 ohki Exp $		*/
 /*======================================================================*/
 #include <nusys.h>
 
@@ -74,9 +74,7 @@ u8 nuContMgrInit(void)
     nuContNum = 0;
     bitmask = 1;
     pattern = 0;
-    
-
-    for(cnt = 0; cnt < NU_CONT_MAXCONTROLLERS; 	bitmask <<= 1, cnt++){
+    for(cnt = 0; cnt < NU_CONT_MAXCONTROLLERS; cnt++){
 	
 	/* Error check.  Not used if error occurred.  */
 	if(nuContStatus[cnt].errno) continue;
@@ -86,7 +84,7 @@ u8 nuContMgrInit(void)
 	    nuContNum++;
 	    pattern |= bitmask;
 	}
-
+	bitmask <<= 1;
     }
     return pattern;
 }

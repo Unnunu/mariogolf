@@ -1,51 +1,9 @@
-Version 2.06
-Modified the default graphics microcode
-   -- The F3DEX-series microcodes have been the default microcodes in the past.
-      Beginning with this version,  F3DEX2 will be the default microcode.
-      Therefore, "F3DEX_GBI_2" is defined in nusys.h. However, if
-      F3DEX_GBI is already defined, F3DEX_GBI_2 is not defined.
-      When the F3DEX-related microcodes are used, please define
-      F3DEX_GBI for the application code compile option. (It is not necessary
-      to change anything at NuSystem side.)
-
-Changes regarding microcode's FIFO buffer
-   -- Changed so that the user can set the size and the location of the
-      FIFO buffer of the graphics microcode. Added nuGfxSetUcodeFifo()
-      for setting, and changed nuGfInit() and nuGfxInitEX2().
-
-Addition and changes to the boot code
-   -- Beginning with OS2.0K, the osInitialize() function becomes a macro that 
-      allows initialization process for each development environment. Along with
-      this change, object codes have been added to nuboot.c to
-      include the initialization code for various development environments.
-      The added object codes include:
-
-      for ROM
-      nusys_rom.o
-
-      for ROM debugging
-      nusys.o nusys_ptn.o nusys_isv.o nusys_emu.o nusys_msp.o
-
-      for debugging
-      nusys_d.o nusys_ptn_d.o nusys_isv_d.o nusys_emu_d.o nusys_msp_d.o
-
-      nusys.o and nusys_d.o perform automatical detection
-      _FINALROM is defined in nusys_rom.o
-      ISV64 is defined in nusys_isv.o and nusys_isv_d.o
-      PTN64 is defined in nusys_ptn.o and nusys_ptn_d.o
-      MWN64 is defined in nusys_msp.o and nusys_msp_d.o
-
-
-Fixed problems
-   -- Fixed a problem in the nuContMgrInit function, where the local variable
-      would not be shifted when an error occurs and an erroneous value 
-      resulted.
-
 Version 2.05
+
 
 Changed the compile environment
 
-     Libraries are now created in the O2 (Irix6.3) environment, whereas up 
+     Libraries are now created in the O2 (Irix6.2) environment, whereas up 
      until now they were created in the Indy (Irix5.3) environment.
 
 Added functions

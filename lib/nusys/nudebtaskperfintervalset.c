@@ -5,7 +5,7 @@
 /*		Copyright (C) 1999, NINTENDO Co,Ltd.			*/
 /*									*/
 /*======================================================================*/
-/* $Id: nudebtaskperfintervalset.c,v 1.2 1999/06/10 04:41:56 ohki Exp $	*/
+/* $Id: nudebtaskperfintervalset.c,v 1.1 1999/05/27 01:49:42 ohki Exp ohki $	*/
 /*======================================================================*/
 #ifdef NU_DEBUG
 #include <nusys.h>

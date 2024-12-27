@@ -7,7 +7,7 @@
 /*----------------------------------------------------------------------*/    
 /* Ver 1.0	97/10/9		Created by Kensaku Ohki(SLANP)		*/
 /*======================================================================*/
-#define	F3DEX_GBI
+
 #include <nusys.h>
 
 /*----------------------------------------------------*/
@@ -108,12 +108,8 @@ void nuGfxInit(void)
     /* Register the call-back function to switch frame buffers  */
     nuGfxSwapCfbFuncSet(nuGfxSwapCfb);
 
-    /* Set FIFO buffer for FIFO microcode	*/
-    nuGfxSetUcodeFifo(nuRDPOutputBuf, NU_GFX_RDP_OUTPUTBUFF_SIZE);
 
-    /* Register graphics microcode */
-    nuGfxSetUcode(nugfx_ucode); 
-
+    nuGfxSetUcode(nugfx_ucode);
     /* Initialize the graphic task manager 	*/
     nuGfxTaskMgrInit();
 

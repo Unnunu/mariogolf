@@ -5,7 +5,7 @@
 /*		Copyright (C) 1997, NINTENDO Co,Ltd.			*/
 /*									*/
 /*======================================================================*/
-/* $Id: nudebtaskperfbar1_ex2.c,v 1.3 1999/06/10 04:41:37 ohki Exp $*/
+/* $Id: nudebtaskperfbar1_ex2.c,v 1.2 1998/07/12 12:17:39 ohki Exp ohki $*/
 /*======================================================================*/
 #ifdef NU_DEBUG
 #define	F3DEX_GBI_2
