@@ -22,7 +22,7 @@ ELF_PATH = f"build/{BASENAME}.elf"
 Z64_PATH = f"build/{BASENAME}.z64"
 OK_PATH = f"build/{BASENAME}.ok"
 
-COMMON_INCLUDES = "-I include -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc -I lib/nusys"
+COMMON_INCLUDES = "-I include -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc -I lib/nusys -I build/include"
 
 CROSS = "mips-linux-gnu-"
 CROSS_AS = f"{CROSS}as"
