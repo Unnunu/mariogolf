@@ -42,8 +42,10 @@ options:
 
   extensions_path: tools/splat_ext
 
-  # string_encoding: ASCII
-  # data_string_encoding: ASCII
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  # string_encoding: SHIFT-JIS
+  # data_string_encoding: SHIFT_JIS
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
   # libultra_symbols: True
@@ -77,12 +79,13 @@ segments:
       
       - [0x1050, c, ../lib/nusys/nupireadrom]
       - [0x1130, c, overlay_manager]
-      - [0x17B0, asm]
-      - [0x3700, asm]
+      - [0x17B0, c] # weird rodata alignment and sjis strings
+      - [0x3700, asm] # nugfxinit
       - [0x37B0, asm] # nusched
       - [0x4650, asm]
-      - [0x4840, asm]
-      - [0x4D00, asm]
+      - [0x4840, asm] # nugfxtaskmgr
+      - [0x4CE0, asm]
+      - [0x4D00, asm] # guNormalize
       - [0x4DD0, c, main]
       - [0x5A40, asm]
       - [0xDCE0, asm]
@@ -360,7 +363,7 @@ segments:
       - [0xA4A90, data]
 
       - [0xA5360, .rodata, overlay_manager]
-      - [0xA54D0, rodata]
+      - [0xA54D0, rodata] # .rodata, 17B0]
       - [0xA5600, rodata]
       - [0xA5CE0, rodata]
       - [0xA5D30, rodata]
