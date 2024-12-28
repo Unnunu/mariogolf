@@ -1,7 +1,9 @@
 DD_800D2930
 bss_filler_1
+gOverlayDataLoaded
 __Dom2SpeedParam
 bss_filler_2
 __Dom1SpeedParam
 bss_3
+D_8012CFC0
 __osBaseTimer

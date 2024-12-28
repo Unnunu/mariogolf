@@ -3,6 +3,13 @@
 #include "ld_addrs.h"
 
 #define NUM_OVERLAYS ARRAY_COUNTU(sOverlays)
+#define OVERLAY(name) \
+    (u32) name ## _ROM_START, \
+    (u32) name ## _ROM_END, \
+    (u32) name ## _TEXT_START, \
+    (u32) name ## _TEXT_END, \
+    (u32) name ## _BSS_START, \
+    (u32) name ## _BSS_END
 
 typedef struct Overlay {
     /* 0x00 */ s8 isLoaded;
@@ -38,233 +45,28 @@ s8 D_800B5F50[] = { 27, 29, 32, -1 };
 s8 D_800B5F54[] = { 31, -1 };
 
 Overlay sOverlays[] = {
-    {
-        FALSE,
-        D_800B5F14,
-        (u32)ovl1_ROM_START,
-        (u32)ovl1_ROM_END,
-        (u32)ovl1_TEXT_START,
-        (u32)ovl1_TEXT_END,
-        (u32)ovl1_BSS_START,
-        (u32)ovl1_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91380
-    {
-        FALSE,
-        D_800B5F14,
-        (u32)ovl1_ROM_START,
-        (u32)ovl1_ROM_END,
-        (u32)ovl1_TEXT_START,
-        (u32)ovl1_TEXT_END,
-        (u32)ovl1_BSS_START,
-        (u32)ovl1_BSS_END,
-        NULL,
-        NULL
-    },
-    // 913A8
-    {
-        FALSE,
-        D_800B5F14,
-        (u32)ovl1_ROM_START,
-        (u32)ovl1_ROM_END,
-        (u32)ovl1_TEXT_START,
-        (u32)ovl1_TEXT_END,
-        (u32)ovl1_BSS_START,
-        (u32)ovl1_BSS_END,
-        func_80025D30,
-        func_80080E14
-    },
-    // 913D0
-    {
-        FALSE,
-        D_800B5F20,
-        (u32)ovl2_ROM_START,
-        (u32)ovl2_ROM_END,
-        (u32)ovl2_TEXT_START,
-        (u32)ovl2_TEXT_END,
-        (u32)ovl2_BSS_START,
-        (u32)ovl2_BSS_END,
-        func_8005A580,
-        func_8005ACF8
-    },
-    // 913F8
-    {
-        FALSE,
-        D_800B5F24,
-        (u32)ovl3_ROM_START,
-        (u32)ovl3_ROM_END,
-        (u32)ovl3_TEXT_START,
-        (u32)ovl3_TEXT_END,
-        (u32)ovl3_BSS_START,
-        (u32)ovl3_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91420
-    {
-        FALSE,
-        D_800B5F28,
-        (u32)ovl4_ROM_START,
-        (u32)ovl4_ROM_END,
-        (u32)ovl4_TEXT_START,
-        (u32)ovl4_TEXT_END,
-        (u32)ovl4_BSS_START,
-        (u32)ovl4_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91448
-    {
-        FALSE,
-        D_800B5F2C,
-        (u32)ovl5_ROM_START,
-        (u32)ovl5_ROM_END,
-        (u32)ovl5_TEXT_START,
-        (u32)ovl5_TEXT_END,
-        (u32)ovl5_BSS_START,
-        (u32)ovl5_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91470
-    {
-        FALSE,
-        D_800B5F30,
-        (u32)ovl6_ROM_START,
-        (u32)ovl6_ROM_END,
-        (u32)ovl6_TEXT_START,
-        (u32)ovl6_TEXT_END,
-        (u32)ovl6_BSS_START,
-        (u32)ovl6_BSS_END,
-        func_80025D54,
-        0x801F5100
-    },
-    // 91498
-    {
-        FALSE,
-        D_800B5F34,
-        (u32)ovl7_ROM_START,
-        (u32)ovl7_ROM_END,
-        (u32)ovl7_TEXT_START,
-        (u32)ovl7_TEXT_END,
-        (u32)ovl7_BSS_START,
-        (u32)ovl7_BSS_END,
-        0x801F4C84,
-        0x801F4D48
-    },
-    // 914C0
-    {
-        FALSE,
-        D_800B5F38,
-        (u32)ovl8_ROM_START,
-        (u32)ovl8_ROM_END,
-        (u32)ovl8_TEXT_START,
-        (u32)ovl8_TEXT_END,
-        (u32)ovl8_BSS_START,
-        (u32)ovl8_BSS_END,
-        0x801F4A40,
-        NULL
-    },
-    // 914E8
-    {
-        FALSE,
-        D_800B5F3C,
-        (u32)ovl9_ROM_START,
-        (u32)ovl9_ROM_END,
-        (u32)ovl9_TEXT_START,
-        (u32)ovl9_TEXT_END,
-        (u32)ovl9_BSS_START,
-        (u32)ovl9_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91510
-    {
-        FALSE,
-        D_800B5F40,
-        (u32)ovlA_ROM_START,
-        (u32)ovlA_ROM_END,
-        (u32)ovlA_TEXT_START,
-        (u32)ovlA_TEXT_END,
-        (u32)ovlA_BSS_START,
-        (u32)ovlA_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91538
-    {
-        FALSE,
-        D_800B5F44,
-        (u32)ovlB_ROM_START,
-        (u32)ovlB_ROM_END,
-        (u32)ovlB_TEXT_START,
-        (u32)ovlB_TEXT_END,
-        (u32)ovlB_BSS_START,
-        (u32)ovlB_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91560
-    {
-        FALSE,
-        D_800B5F48,
-        (u32)ovlC_ROM_START,
-        (u32)ovlC_ROM_END,
-        (u32)ovlC_TEXT_START,
-        (u32)ovlC_TEXT_END,
-        (u32)ovlC_BSS_START,
-        (u32)ovlC_BSS_END,
-        NULL,
-        NULL
-    },
-    // 91588
-    {
-        FALSE,
-        D_800B5F4C,
-        (u32)ovlD_ROM_START,
-        (u32)ovlD_ROM_END,
-        (u32)ovlD_TEXT_START,
-        (u32)ovlD_TEXT_END,
-        (u32)ovlD_BSS_START,
-        (u32)ovlD_BSS_END,
-        NULL,
-        NULL
-    },
-    // 915B0
-    {
-        FALSE,
-        D_800B5F50,
-        (u32)ovlE_ROM_START,
-        (u32)ovlE_ROM_END,
-        (u32)ovlE_TEXT_START,
-        (u32)ovlE_TEXT_END,
-        (u32)ovlE_BSS_START,
-        (u32)ovlE_BSS_END,
-        0x801F4B20,
-        0x801F4E70
-    },
-    {
-        FALSE,
-        D_800B5F54,
-        (u32)ovlF_ROM_START,
-        (u32)ovlF_ROM_END,
-        (u32)ovlF_TEXT_START,
-        (u32)ovlF_TEXT_END,
-        (u32)ovlF_BSS_START,
-        (u32)ovlF_BSS_END,
-        0x801F4B9C,
-        0x801F4E54
-    },
+    { FALSE, D_800B5F14, OVERLAY(ovl1), NULL, NULL },
+    { FALSE, D_800B5F14, OVERLAY(ovl1), NULL, NULL },
+    { FALSE, D_800B5F14, OVERLAY(ovl1), func_80025D30, func_80080E14 },
+    { FALSE, D_800B5F20, OVERLAY(ovl2), func_8005A580, func_8005ACF8 },
+    { FALSE, D_800B5F24, OVERLAY(ovl3), NULL, NULL },
+    { FALSE, D_800B5F28, OVERLAY(ovl4), NULL, NULL },
+    { FALSE, D_800B5F2C, OVERLAY(ovl5), NULL, NULL },
+    { FALSE, D_800B5F30, OVERLAY(ovl6), func_80025D54, func_801F5100_137780 },
+    { FALSE, D_800B5F34, OVERLAY(ovl7), func_801F4C84_14ECC4, func_801F4D48_14ED88 },
+    { FALSE, D_800B5F38, OVERLAY(ovl8), func_801F4A40_14FB60, NULL },
+    { FALSE, D_800B5F3C, OVERLAY(ovl9), NULL, NULL },
+    { FALSE, D_800B5F40, OVERLAY(ovlA), NULL, NULL },
+    { FALSE, D_800B5F44, OVERLAY(ovlB), NULL, NULL },
+    { FALSE, D_800B5F48, OVERLAY(ovlC), NULL, NULL },
+    { FALSE, D_800B5F4C, OVERLAY(ovlD), NULL, NULL },
+    { FALSE, D_800B5F50, OVERLAY(ovlE), func_801F4B20_165CB0, func_801F4E70_166000 },
+    { FALSE, D_800B5F54, OVERLAY(ovlF), func_801F4B9C_16D7BC, func_801F4E54_16DA74 },
 };
 
 s8 DD_800D2930[64] ALIGNED(8);
-
-extern s8 D_800FC858[];
-extern u32 D_8012CFC0[];
-extern u32 D_800B67F0;
-extern s8 D_800B67C0;
+s8 gOverlayDataLoaded[64] ALIGNED(8);
+u32 D_8012CFC0[64] ALIGNED(8);
 
 void func_80025D30(void) {
     func_80080DCC();
@@ -287,7 +89,7 @@ void initOverlayManager(void) {
 
     for (i = 0; i < 64; i++) {
         DD_800D2930[i] = -1;
-        D_800FC858[i] = FALSE;
+        gOverlayDataLoaded[i] = FALSE;
         D_8012CFC0[i] = 0x80000000;
     }
 
@@ -305,7 +107,7 @@ void initOverlayManager(void) {
 
     for (i = 0; i < 64; i++) {
         if (DD_800D2930[i] == -1) {
-            D_800FC858[i] = TRUE;
+            gOverlayDataLoaded[i] = TRUE;
         }
     }
 }
@@ -386,7 +188,7 @@ s32 loadOverlay(s32 ovlIndex) {
         }
 
         for (k = 0; ptr[k] != -1; k++) {
-            D_800FC858[ptr[k]] = TRUE;
+            gOverlayDataLoaded[ptr[k]] = TRUE;
         }
 
         overlay->isLoaded = TRUE;
@@ -427,7 +229,7 @@ void unloadOverlay(s32 ovlIndex) {
     }
 
     for (k = 0; ptr[k] != -1; k++) {
-        D_800FC858[ptr[k]] = FALSE;
+        gOverlayDataLoaded[ptr[k]] = FALSE;
     }
 
     osWritebackDCacheAll();

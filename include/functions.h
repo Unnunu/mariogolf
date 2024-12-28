@@ -10,4 +10,13 @@ void func_80080E14(void);
 void func_8005A580(void);
 void func_8005ACF8(void);
 
+void func_801F5100_137780(void);
+void func_801F4C84_14ECC4(void);
+void func_801F4D48_14ED88(void);
+void func_801F4A40_14FB60(void);
+void func_801F4B20_165CB0(void);
+void func_801F4E70_166000(void);
+void func_801F4B9C_16D7BC(void);
+void func_801F4E54_16DA74(void);
+
 #endif
