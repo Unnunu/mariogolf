@@ -5,6 +5,8 @@
         "nusys.h": "c",
         "functions.h": "c",
         "ultraerror.h": "c",
-        "macros.h": "c"
+        "macros.h": "c",
+        "common_structs.h": "c",
+        "cstdlib": "c"
     }
 }

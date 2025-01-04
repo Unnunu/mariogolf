@@ -4,6 +4,7 @@
 #include "include_asm.h"
 #include "ultra64.h"
 #include "macros.h"
+#include "common_structs.h"
 #include "functions.h"
 #include "variables.h"
 

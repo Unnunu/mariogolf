@@ -82,6 +82,9 @@ canOverlayBeLoaded = 0x80025F18;
 loadOverlay = 0x800260C4;
 unloadOverlay = 0x80026230;
 
+D_800B6200 = 0x800B6200; // size:0x80
+D_800B6284 = 0x800B6284; // size:0x2E0
+
 guNormalize = 0x80029900;
 mainproc = 0x80029C34;
 __osGetActiveQueue = 0x800469E0;

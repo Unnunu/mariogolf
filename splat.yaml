@@ -332,7 +332,8 @@ segments:
       - [0x8F440, data]
 
       - [0x91310, .data, overlay_manager]
-      - [0x91600, data]
+      - [0x91600, .data, 17B0]
+      - [0x91970, data]
       - [0xA32C0, .data, ../lib/ultralib/src/io/aisetnextbuf]
       - [0xA32D0, data]
       - [0xA3580, .data, ../lib/ultralib/src/audio/sl]

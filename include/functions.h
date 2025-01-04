@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+f32 fabsf(f32);
+
 void func_80080DCC(void);
 void func_801FD624(void);
 void func_802033B0(void);
