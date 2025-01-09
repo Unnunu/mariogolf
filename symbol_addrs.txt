@@ -4,11 +4,12 @@ osResetType = 0x8000030C;
 osAppNMIBuffer = 0x8000031C;
 
 nuPiReadRom = 0x80025C50; // type:func rom:0x1050
-nuGfxInit = 0x80028300; // type:func rom:0x3700
+nuGfxInitEX2 = 0x80028300; // type:func rom:0x3700
 nuScCreateScheduler = 0x800283B0; // type:func rom:0x37B0
 nuScAddClient = 0x8002891C; // type:func rom:0x3D1C
 nuScResetClientMesgType = 0x800289AC; // type:func rom:0x3DAC
 nuScRemoveClient = 0x800289EC; // type:func rom:0x3DEC
+nuGfxSetCfb = 0x80029250;
 nuGfxTaskMgr = 0x80029440; // type:func rom:0x4840
 nuGfxTaskMgrInit = 0x800295BC; // type:func rom:0x49BC
 nuGfxTaskStart = 0x80029774; // type:func rom:0x4B74
@@ -61,6 +62,9 @@ nuContDataLock = 0x800A2ED0; // type:func rom:0x7E2D0
 nuContDataUnLock = 0x800A2F00; // type:func rom:0x7E300
 nuContQueryRead = 0x800A2F30; // type:func rom:0x7E330
 nuContRmbForceStopEnd = 0x800E0900; // type:func rom:0xBBD00
+
+gspF3DEX2_fifoTextStart = 0x800B4B80;
+gspF3DEX2_fifoDataStart = 0x800C9B40;
 
 nuGfxTaskMgrMesgQ = 0x801B93F8;
 nuGfxTaskMgrMesgBuf = 0x800DAB40;
@@ -378,8 +382,6 @@ __udivdi3 = 0x800B3BC0;
 __umoddi3 = 0x800B3BE0;
 __udiv_w_sdiv = 0x800B3E40;
 rspbootTextStart = 0x800B3E50;
-nugfx_ucode = 0x800B6680;
-FrameBuf = 0x800B6688;
 __additional_scanline = 0x800C826C;
 gzip_data_0000 = 0x800C4020;
 n_drvrnew_data_0168 = 0x800C7C78;

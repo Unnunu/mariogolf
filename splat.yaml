@@ -80,7 +80,7 @@ segments:
       - [0x1050, c, ../lib/nusys/nupireadrom]
       - [0x1130, c, overlay_manager]
       - [0x17B0, c] # weird rodata alignment and sjis strings
-      - [0x3700, asm] # nugfxinit
+      - [0x3700, c, ../lib/nusys/nugfxinit_ex2]
       - [0x37B0, asm] # nusched
       - [0x4650, asm]
       - [0x4840, asm] # nugfxtaskmgr
@@ -334,6 +334,8 @@ segments:
       - [0x91310, .data, overlay_manager]
       - [0x91600, .data, 17B0]
       - [0x91970, data]
+      - [0x91A80, .data, ../lib/nusys/nugfxinit_ex2]
+      - [0x91B80, data]
       - [0xA32C0, .data, ../lib/ultralib/src/io/aisetnextbuf]
       - [0xA32D0, data]
       - [0xA3580, .data, ../lib/ultralib/src/audio/sl]
